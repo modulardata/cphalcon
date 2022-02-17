@@ -16,11 +16,11 @@ APT_GET_PATH = "/usr/bin/apt-get"
 PHP_PATH = "/usr/bin/php"
 
 
-PHALCON_DIR = HOME_PATH + "/.phalcon"
-PHALCON_SCRIPT = PHALCON_DIR + "/phalcon-devtools/phalcon.sh"
-PHALCON_COMMAND = PHALCON_DIR + "/phalcon-devtools/phalcon.php"
+PHALCON_DIR = f'{HOME_PATH}/.phalcon'
+PHALCON_SCRIPT = f'{PHALCON_DIR}/phalcon-devtools/phalcon.sh'
+PHALCON_COMMAND = f'{PHALCON_DIR}/phalcon-devtools/phalcon.php'
 PHALCON_SCRIPT_BIN_PATH = "/usr/bin/phalcon"
-CPHALCON_BUILD_DIR = PHALCON_DIR + "/cphalcon/build"
+CPHALCON_BUILD_DIR = f'{PHALCON_DIR}/cphalcon/build'
 
 
 LIBS = ("git-core gcc autoconf php5 php5-dev php5-imagick php5-mcrypt\
@@ -56,14 +56,19 @@ def install_phalcon():
     for _file in PHP_INIT_FILE_PATH:
         with open(_file, "a") as fd:
             fd.write("extension=phalcon.so")
-            print("Writing in "+_file)
+            print(f'Writing in {_file}')
     print("Finish Installing Phalcon \n")
 
 
 def install_dependencies():
     print("Installing Dependencies ... \n")
-    proc = Popen(APT_GET_PATH + " -y install " + LIBS, shell=True, stdin=None,
-                 executable="/bin/bash")
+    proc = Popen(
+        f'{APT_GET_PATH} -y install {LIBS}',
+        shell=True,
+        stdin=None,
+        executable="/bin/bash",
+    )
+
     proc.wait()
     print("Finish Installing Dependencies \n")
 
